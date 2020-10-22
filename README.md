@@ -14,7 +14,7 @@ Where:
   - **n** - Propeller speed
   - ***D*** - Propeller diameter
 
-And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=60.95258729999998pt height=47.10651659999999pt/> - Advance Ratio
+And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=60.95258729999998pt height=47.10651659999999pt/> - Advance Ratio - a dimensionless velocity describing the flow around the propeller blade
 
 Designing an aircraft powertrain can be a tedious process when done manually. 
 The designer is required to interpolate the data from the chart based on initial conditions in order to calculate the &eta;.
@@ -50,13 +50,22 @@ Every propeller type has different &eta; characteristics.
 As you can see the 4 bladed prop is the only one having data up to 60° of Angle.
 The remaining data was approximated using ***polynomial regression***.
 
-### Curve fitting
+### Approximating the unknown
+This process can be described in a few simple steps:
+  1. Calculate &eta; ratios for a given pair of propellers (n- and 4-bladed).
+  2. Normalize them and fit a polynomial.
+  3. Use this polynomial to calculate unknown ratios for angles greater than 45°.
+  4. Calculate approximated curves from the 4 bladed prop data and newly obtained ratios.
 
+![Screenshot](docs/images/eff_fit.png)
+
+Normalized &eta; ratios for a 2 bladed propeller.
+A 9<sup>th</sup> degree polynomial was chosen as it had the best fit to the underlying data.
 
 ![Screenshot](docs/images/eff_curves.png)
 
-
-![Screenshot](docs/images/eff_fit.png)
+As you can see the generated data **fit very well with the test curves**.
+The expanded data was then used as a basis for the mesh densing algorithm. 
 
 ### Series interpolation
 
