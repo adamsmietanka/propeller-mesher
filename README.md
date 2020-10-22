@@ -14,7 +14,7 @@ Where:
   - ***n*** - Propeller speed
   - ***D*** - Propeller diameter
 
-And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=49.55567924999999pt height=28.670654099999997pt/> - Advance Ratio
+And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=53.00941964999999pt height=44.70706679999999pt/> - Advance Ratio
 
 Designing an aircraft powertrain can be a tedious process when done manually. 
 The designer is required to interpolate the data from the chart based on initial conditions in order to calculate the &eta;.
