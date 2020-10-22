@@ -13,6 +13,8 @@ Where:
   - ***V*** - Aircraft speed
   - ***n*** - Propeller speed
   - ***D*** - Propeller diameter
+   
+And $\mathbf{J=\frac{V}{nD}}$ - Advance ratio
 
 Designing an aircraft powertrain can be a tedious process when done manually. 
 The designer is required to interpolate the data from the chart based on initial conditions in order to calculate the &eta;.
