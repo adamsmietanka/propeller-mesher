@@ -10,11 +10,11 @@ An example *&eta;* chart can be seen below:
 ![Screenshot](docs/images/eff_chart.png)
 
 Where:
-  - ***V*** - Aircraft speed
-  - ***n*** - Propeller speed
+  - **V** - Aircraft speed
+  - **n** - Propeller speed
   - ***D*** - Propeller diameter
 
-And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=53.00941964999999pt height=44.70706679999999pt/> - Advance Ratio
+And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=60.95258729999998pt height=47.10651659999999pt/> - Advance Ratio
 
 Designing an aircraft powertrain can be a tedious process when done manually. 
 The designer is required to interpolate the data from the chart based on initial conditions in order to calculate the &eta;.
