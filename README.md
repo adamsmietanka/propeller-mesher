@@ -4,14 +4,15 @@ Tools used to create fine meshes used by the [Prop Calculator](https://propeller
 ## Introduction
 One of the steps in aircraft design process is calculating the performance figures. 
 *Max power, max airspeed* and *max service ceiling* are the most prominent examples. 
-In order to calculate them we need to know the engine power and the propeller's **Coefficient of Efficiency *&eta;***. 
+In order to calculate them we need to know the engine's *Coefficient of Power C<sub>p</sub>* and the propeller's **Coefficient of Efficiency *&eta;***.
+Both of these coefficients have their own charts, but we are going to focus on the efficiency.
 An example *&eta;* chart for a 2 bladed prop can be seen below:
 
 ![Screenshot](docs/images/eff_chart.png)
 
 Where:
-  - **V** - Aircraft speed
-  - **n** - Propeller speed
+  - ***V*** - Aircraft speed
+  - ***n*** - Propeller speed
   - ***D*** - Propeller diameter
 
 And <img src="https://github.com/adamsmietanka/propeller-mesher/blob/master/docs/images/eqn.svg?invert_in_darkmode" align=middle width=60.95258729999998pt height=47.10651659999999pt/> - Advance Ratio - a dimensionless velocity describing the flow around the propeller blade
@@ -22,13 +23,6 @@ When the user chooses one of the angles from the chart the process is straightfo
 Otherwise the interpolation becomes very time consuming and the precision of the results may be questioned.
 The whole process could easily be automated but ***the data needed to be processed*** first.
 That led to the birth of this toolkit.
-
-## Built With
-* [Python](https://www.python.org/)
-* [NumPy](https://numpy.org/) - This is the fundamental package for scientific computing with Python
-* [pandas](https://pandas.pydata.org/) - This is a fast and easy to use data analysis and manipulation tool
-* [SciPy](http://scipy.org/) - This is a Python library used for scientific and technical computing
-* [Plotly](http://plotly.com/) - This Python graphing library makes interactive, publication-quality graphs
 
 ## Data sources
 The application is based on two reports published in 1938 and 1939 respectively by the NASA predecessor - National Advisory Committee for Aeronautics:
@@ -60,18 +54,32 @@ This process can be described in a few simple steps:
 ![Screenshot](docs/images/eff_fit.png)
 
 Normalized &eta; ratios for a 2 bladed propeller.
-A 9<sup>th</sup> degree polynomial was chosen as it had the best fit to the underlying data.
-
+A **9<sup>th</sup> degree polynomial was chosen** as it had the best fit to the underlying data.
 ![Screenshot](docs/images/eff_curves.png)
 
-As you can see the generated data **fit very well with the test curves**.
+As you can see the generated data **fits very well with the test curves**.
 The expanded data was then used as a basis for the mesh densing algorithm. 
 
 ### Series interpolation
-
+The mesh was created using curve intersections located at the same relative *z* for every data series. 
+**Splines** were constructed on these nodes and then used to interpolate the green points. 
+The data series on the back side of the surface have been hidden for better readability.
 ![Screenshot](docs/images/eff_densing.png)
 
-## Results
+The mesh step size on the *y* axis was 0.5°, which was a great compromise between accuracy and performance.
 
+## Results
+The points were finally recalculated on a regular grid, which made drawing the mesh as a surface possible.
+This greatly improved accuracy in production usage and enabled clear results visualization.
 ![Screenshot](docs/images/eff_surface.png)
 
+You can see them in action on the [Results tab](https://propellers.herokuapp.com/results) of Prop Calculator.
+
+![Screenshot](docs/images/app.png)
+
+## Built With
+* [Python](https://www.python.org/)
+* [NumPy](https://numpy.org/) - This is the fundamental package for scientific computing with Python
+* [pandas](https://pandas.pydata.org/) - This is a fast and easy to use data analysis and manipulation tool
+* [SciPy](http://scipy.org/) - This is a Python library used for scientific and technical computing
+* [Plotly](http://plotly.com/) - This Python graphing library makes interactive, publication-quality graphs
